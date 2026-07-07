@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anna Kholod Ai-kreator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:   #0d0c0b;
+      --ash:   #1a1916;
+      --fog:   #272521;
+      --mist:  #3a3732;
+      --veil:  #9a9690;
+      --parch: #ccc4b8;
+      --cream: #e8e0d4;
+      --gold:  #b89a6a;
+      --rose:  #8c5f6e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ink);
+      color: var(--cream);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 3rem;
+      background: rgba(13,12,11,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--mist);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.4rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--veil);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--cream); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 3rem 5rem;
+      background: var(--ink);
+      border-bottom: 1px solid var(--mist);
+      position: relative;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(140,95,110,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.6rem;
+      position: relative;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 8vw, 8rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: 0.02em;
+      color: var(--cream);
+      position: relative;
+      max-width: 800px;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--rose);
+    }
+
+    .hero-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 3rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .hero-desc {
+      max-width: 360px;
+      color: var(--veil);
+      font-size: 0.9rem;
+      line-height: 1.9;
+    }
+
+    .hero-cta { display: flex; gap: 1rem; }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2.2rem;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--ink);
+    }
+
+    .btn-gold:hover { background: var(--cream); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--cream);
+      border: 1px solid var(--mist);
+    }
+
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── SECTION LABELS ── */
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 2rem;
+      color: var(--cream);
+    }
+
+    h2 em { font-style: italic; color: var(--rose); }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--mist), transparent);
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--mist);
+    }
+
+    .about-img {
+      background: var(--ash);
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.8rem;
+      color: var(--mist);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 3rem;
+      border-right: 1px solid var(--mist);
+    }
+
+    .about-img-icon { font-size: 2.5rem; opacity: 0.2; }
+
+    .about-content {
+      padding: 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .about-content p {
+      color: var(--parch);
+      font-size: 0.92rem;
+      line-height: 1.95;
+      margin-bottom: 1.2rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.8rem;
+    }
+
+    .tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--mist);
+      color: var(--veil);
+    }
+
+    /* ── VIDEO ── */
+    #video {
+      padding: 6rem 3rem;
+      border-bottom: 1px solid var(--mist);
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .video-card {
+      background: var(--ash);
+      border: 1px solid var(--mist);
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+
+    .video-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+
+    .video-thumb {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: var(--fog);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .play-btn {
+      width: 50px; height: 50px;
+      border: 1px solid rgba(184,154,106,0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .video-card:hover .play-btn { background: rgba(184,154,106,0.15); border-color: var(--gold); }
+
+    .play-btn::after {
+      content: '';
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 7px 0 7px 12px;
+      border-color: transparent transparent transparent var(--gold);
+      margin-left: 3px;
+    }
+
+    .video-info { padding: 1.2rem 1.4rem 1.6rem; }
+
+    .video-cat {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+
+    .video-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--cream);
+      line-height: 1.3;
+    }
+
+    .video-desc {
+      margin-top: 0.5rem;
+      font-size: 0.78rem;
+      color: var(--veil);
+      line-height: 1.7;
+    }
+
+    .video-card-add {
+      border-style: dashed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      gap: 0.6rem;
+      color: var(--mist);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+
+    .video-card-add:hover { border-color: var(--gold); color: var(--gold); }
+    .plus { font-size: 1.8rem; font-weight: 200; }
+
+    /* ── GALLERY ── */
+    #gallery {
+      background: var(--ash);
+      padding: 6rem 3rem;
+      border-bottom: 1px solid var(--mist);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 0.8rem;
+      margin-top: 3rem;
+    }
+
+    .gallery-item {
+      background: var(--fog);
+      border: 1px solid var(--mist);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+
+    .gallery-item:hover { border-color: var(--rose); }
+
+    .gallery-item:nth-child(1) { grid-column: span 7; aspect-ratio: 4/3; }
+    .gallery-item:nth-child(2) { grid-column: span 5; aspect-ratio: 3/4; }
+    .gallery-item:nth-child(3) { grid-column: span 4; aspect-ratio: 1; }
+    .gallery-item:nth-child(4) { grid-column: span 4; aspect-ratio: 1; }
+    .gallery-item:nth-child(5) { grid-column: span 4; aspect-ratio: 1; }
+    .gallery-item:nth-child(6) { grid-column: span 6; aspect-ratio: 16/9; }
+    .gallery-item:nth-child(7) { grid-column: span 6; aspect-ratio: 16/9; }
+
+    .gallery-ph {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--mist);
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .gallery-ph-icon { font-size: 2rem; opacity: 0.2; }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(13,12,11,0.75);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.2rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+    .gallery-overlay-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--cream);
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      padding: 6rem 3rem;
+      border-bottom: 1px solid var(--mist);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--mist);
+      margin-top: 3rem;
+    }
+
+    .service-item {
+      padding: 2.8rem 2.4rem;
+      border-right: 1px solid var(--mist);
+      background: var(--ash);
+      transition: background 0.3s;
+    }
+
+    .service-item:last-child { border-right: none; }
+    .service-item:hover { background: var(--fog); }
+
+    .service-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      color: var(--mist);
+      line-height: 1;
+      margin-bottom: 1.4rem;
+    }
+
+    .service-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      color: var(--cream);
+      margin-bottom: 0.8rem;
+    }
+
+    .service-desc {
+      font-size: 0.82rem;
+      color: var(--veil);
+      line-height: 1.8;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--ash);
+      padding: 6rem 3rem 7rem;
+      border-top: 1px solid var(--mist);
+    }
+
+    .contact-inner { max-width: 580px; }
+
+    .contact-intro {
+      color: var(--parch);
+      font-size: 0.95rem;
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-links { display:flex; flex-direction:column; gap:0.8rem; margin-bottom:2rem; }
+
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--veil);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 1.2rem 1.6rem;
+      border: 1px solid var(--mist);
+      margin-bottom: 2.5rem;
+      transition: all 0.3s;
+    }
+
+    .contact-email:hover { color: var(--cream); border-color: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--mist);
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--mist);
+      background: var(--ink);
+    }
+
+    footer a { color: var(--mist); text-decoration: none; transition: color 0.3s; }
+    footer a:hover { color: var(--veil); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1.1rem 1.5rem; }
+      .nav-links { display: none; }
+
+      #hero { padding: 0 1.5rem 4rem; }
+
+      #about { grid-template-columns: 1fr; }
+      .about-img { border-right: none; border-bottom: 1px solid var(--mist); aspect-ratio: 4/3; }
+      .about-content { padding: 3rem 1.5rem; }
+
+      #video, #gallery, #services, #contact { padding: 4rem 1.5rem; }
+
+      .video-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: 1fr; }
+      .montaz-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .kolorowanki-grid { grid-template-columns: 1fr 1fr; }
+      .reklama-grid { grid-template-columns: 1fr 1fr; }
+      .social-grid { grid-template-columns: 1fr 1fr; }
+      .service-item { border-right: none; border-bottom: 1px solid var(--mist); }
+      .service-item:last-child { border-bottom: none; }
+
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item { grid-column: span 1 !important; }
+      .gallery-item:nth-child(1) { grid-column: span 2 !important; }
+
+      footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+    }
+
+
+    /* ── KOLOROWANKI ── */
+    #kolorowanki {
+      background: var(--ash);
+      padding: 6rem 3rem;
+      border-bottom: 1px solid var(--mist);
+    }
+
+    .kolorowanki-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      margin-top: 3rem;
+    }
+
+    .kolorowanki-item {
+      background: var(--fog);
+      border: 1px solid var(--mist);
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.3s;
+      aspect-ratio: 3/4;
+    }
+
+    .kolorowanki-item:hover { border-color: var(--rose); }
+
+    .kolorowanki-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.95);
+      transition: filter 0.3s;
+    }
+
+    .kolorowanki-item:hover img { filter: brightness(1.05); }
+
+
+    /* ── REKLAMA PRODUKTOWA ── */
+    #reklama {
+      padding: 6rem 3rem;
+      border-bottom: 1px solid var(--mist);
+    }
+
+    .reklama-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .reklama-item {
+      overflow: hidden;
+      border: 1px solid var(--mist);
+      aspect-ratio: 9/16;
+      cursor: pointer;
+      transition: border-color 0.3s, transform 0.3s;
+      position: relative;
+    }
+
+    .reklama-item:hover { border-color: var(--gold); transform: translateY(-2px); }
+
+    .reklama-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── PRODUCTS ── */
+    #products {
+      background: var(--fog);
+      padding: 6rem 3rem;
+      border-bottom: 1px solid var(--mist);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      margin-top: 3rem;
+    }
+
+    .product-card {
+      background: var(--ash);
+      border: 1px solid var(--mist);
+      padding: 2rem 1.8rem 2.2rem;
+      transition: border-color 0.3s, transform 0.3s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .product-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+
+    .product-icon {
+      font-size: 1.6rem;
+      opacity: 0.6;
+      margin-bottom: 0.4rem;
+    }
+
+    .product-cat {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .product-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: var(--cream);
+      line-height: 1.25;
+    }
+
+    .product-desc {
+      font-size: 0.78rem;
+      color: var(--veil);
+      line-height: 1.75;
+      flex: 1;
+    }
+
+    .product-link {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      padding-top: 0.6rem;
+      border-top: 1px solid var(--mist);
+      transition: color 0.3s;
+    }
+
+    .product-link:hover { color: var(--cream); }
+
+
+
+    /* ── SOCIAL MEDIA ── */
+    #socialmedia {
+      background: var(--fog);
+      padding: 6rem 3rem;
+      border-bottom: 1px solid var(--mist);
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .social-item {
+      background: var(--ash);
+      border: 1px solid var(--mist);
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .social-item:hover { border-color: var(--rose); }
+
+    /* ── MONTAZ ── */
+    #montaz {
+      background: var(--ink);
+      padding: 6rem 3rem;
+      border-top: 1px solid var(--mist);
+      border-bottom: 1px solid var(--mist);
+    }
+
+    .montaz-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    .montaz-text p {
+      color: var(--parch);
+      font-size: 0.95rem;
+      line-height: 1.9;
+      margin-bottom: 1.2rem;
+    }
+
+    .montaz-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .montaz-visual {
+      background: var(--ash);
+      border: 1px solid var(--mist);
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .montaz-ph {
+      color: var(--mist);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    /* Remove arrow links from product cards */
+    .product-card { cursor: default; }
+
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Anna Kholod Ai-kreator</a>
+    <ul class="nav-links">
+      <li><a href="#about">O mnie</a></li>
+      <li><a href="#video">Wideo</a></li>
+      <li><a href="#reklama">Reklama</a></li>
+      <li><a href="#gallery">Galeria</a></li>
+      <li><a href="#kolorowanki">Kolorowanki</a></li>
+      <li><a href="#products">Produkty</a></li>
+      <li><a href="#montaz">Montaż</a></li>
+      <li><a href="#socialmedia">Social media</a></li>
+      <li><a href="#services">Usługi</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <p class="hero-tag">Ai-kreator · Polska</p>
+    <h1>Tworzę treści,<br>które <em>działają</em></h1>
+    <div class="hero-row">
+      <p class="hero-desc">
+        Wideo, ilustracje, muzyka i identyfikacja wizualna.
+        Każdy projekt traktuję indywidualnie — dopasowuję styl do Twojej marki i odbiorców.
+      </p>
+      <div class="hero-cta">
+        <a href="#gallery" class="btn btn-gold">Zobacz prace</a>
+        <a href="#contact" class="btn btn-ghost">Kontakt</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-img">
+      <div class="about-img-icon">◈</div>
+      Wstaw tutaj<br>swoje zdjęcie<br>lub ilustrację
+    </div>
+    <div class="about-content">
+      <p class="section-label">O mnie</p>
+      <h2>Cześć,<br>jestem <em>Anna Kholod</em></h2>
+      <p>
+        Tworzę wizualny content — ilustracje cyfrowe, grafiki na social media, reklamy produktowe, kolorowanki, muzykę i montaż wideo.
+      </p>
+      <p>
+        Każdy projekt traktuję indywidualnie i dobieram styl do potrzeb klienta — niezależnie od tego, czy szukasz mrocznej estetyki, bajkowej ilustracji czy minimalistycznej fotografii produktowej.
+      </p>
+      <div class="tags">
+        <span class="tag">Wideo</span>
+        <span class="tag">Ilustracja cyfrowa</span>
+        <span class="tag">Muzyka</span>
+        <span class="tag">Content creator</span>
+        <span class="tag">AI Art</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section id="video">
+    <p class="section-label">Prace wideo</p>
+    <h2>Realizacje &amp; <em>reklamy</em></h2>
+
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="video-thumb" style="padding:0; overflow:hidden;">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/FmiYTqj4Epk" title="Anna Kholod Ai-kreator" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-cat">Reklama produktowa</p>
+          <p class="video-title">Realizacja wideo</p>
+          <p class="video-desc">Przykład realizacji wideo — reklama produktowa.</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb" style="padding:0; overflow:hidden;">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/3bLyi694_S8" title="Anna Kholod Ai-kreator" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-cat">Reklama produktowa</p>
+          <p class="video-title">Realizacja wideo</p>
+          <p class="video-desc">Przykład realizacji wideo — reklama produktowa.</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb" style="padding:0; overflow:hidden;">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/0TttReTW0AM" title="Anna Kholod Ai-kreator" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-cat">Reklama produktowa</p>
+          <p class="video-title">Realizacja wideo</p>
+          <p class="video-desc">Przykład realizacji wideo — reklama produktowa.</p>
+        </div>
+      </div>
+
+      <div class="video-card video-card-add">
+        <span class="plus">+</span>
+        Dodaj kolejne wideo
+      </div>
+    </div>
+  </section>
+
+  <!-- REKLAMA PRODUKTOWA -->
+  <section id="reklama">
+    <p class="section-label">Realizacje</p>
+    <h2>Reklama <em>produktowa</em></h2>
+
+    <div class="reklama-grid">
+      <div class="reklama-item"><img src="IMG_0377.png" alt="Reklama produktowa"></div>
+      <div class="reklama-item"><img src="IMG_0396.png" alt="Reklama produktowa"></div>
+      <div class="reklama-item"><img src="IMG_0395.png" alt="Reklama produktowa"></div>
+      <div class="reklama-item"><img src="IMG_0392.png" alt="Reklama produktowa"></div>
+      <div class="reklama-item"><img src="IMG_0393.png" alt="Reklama produktowa"></div>
+      <div class="reklama-item"><img src="IMG_0394.png" alt="Reklama produktowa"></div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <p class="section-label">Galeria</p>
+    <h2>Obrazy &amp; <em>ilustracje</em></h2>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="IMG_0302.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Reklama pieczywa</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_0303.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Wojowniczka</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_0304.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Atmosfera</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_0306.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Srebrna kobieta</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_0305.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Ogród</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_0307.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Moda</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_0308.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Maliny</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0318.png" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0323.png" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0329.png" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0330.png" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0332.png" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0335.png" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0336.png" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0337.png" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0368.png" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0370.png" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0371.png" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0373.png" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0374.png" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0372.png" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0381.png" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0380.png" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0387.PNG" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0386.PNG" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0385.PNG" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0384.PNG" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+      <div class="gallery-item" style="grid-column: span 4; aspect-ratio: 3/4;">
+        <img src="IMG_0383.PNG" alt="Ilustracja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-overlay"><span class="gallery-overlay-text">Tytuł pracy</span></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- KOLOROWANKI -->
+  <section id="kolorowanki">
+    <p class="section-label">Do pobrania i druku</p>
+    <h2>Kolorowanki</h2>
+
+    <div class="kolorowanki-grid">
+      <div class="kolorowanki-item">
+        <img src="IMG_0378.png" alt="Kolorowanka">
+      </div>
+      <div class="kolorowanki-item">
+        <img src="IMG_0379.png" alt="Kolorowanka">
+      </div>
+      <div class="kolorowanki-item">
+        <img src="IMG_0391.png" alt="Kolorowanka">
+      </div>
+      <div class="kolorowanki-item">
+        <img src="IMG_0390.png" alt="Kolorowanka">
+      </div>
+      <div class="kolorowanki-item">
+        <img src="IMG_0389.png" alt="Kolorowanka">
+      </div>
+      <div class="kolorowanki-item">
+        <img src="IMG_0388.png" alt="Kolorowanka">
+      </div>
+      <div class="kolorowanki-item" style="border-style:dashed; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:0.6rem; color:var(--mist); font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase;">
+        <span style="font-size:1.8rem; font-weight:200;">+</span>
+        Więcej wkrótce
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products">
+    <p class="section-label">Co tworzę</p>
+    <h2>Produkty <em>cyfrowe</em></h2>
+
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-icon">&#128444;</div>
+        <p class="product-cat">Ilustracje cyfrowe</p>
+        <p class="product-title">Printy &amp; grafiki</p>
+        <p class="product-desc">Ilustracje cyfrowe w wysokiej rozdzielczości gotowe do druku — plakaty, okładki, grafiki dekoracyjne.</p>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">&#9999;</div>
+        <p class="product-cat">Kolorowanki</p>
+        <p class="product-title">Strony do kolorowania</p>
+        <p class="product-desc">Oryginalne czarno-białe ilustracje do wydruku i pokolorowania — dla dzieci i dorosłych.</p>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">&#127925;</div>
+        <p class="product-cat">Muzyka</p>
+        <p class="product-title">Ścieżki dźwiękowe</p>
+        <p class="product-desc">Autorskie kompozycje ambient i atmosferyczne — idealne do wideo, podcastów i projektów kreatywnych.</p>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">&#128214;</div>
+        <p class="product-cat">Ilustracje do książek</p>
+        <p class="product-title">Opowiadania &amp; książki</p>
+        <p class="product-desc">Zajmuję się ilustrowaniem i oprawą graficzną książek — okładki, grafiki wewnętrzne, spójna identyfikacja wizualna publikacji.</p>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">&#128247;</div>
+        <p class="product-cat">Social media</p>
+        <p class="product-title">Treści na social media</p>
+        <p class="product-desc">Grafiki, posty i materiały wizualne dopasowane do różnych platform — estetyczne i przyciągające uwagę.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL MEDIA -->
+  <section id="socialmedia">
+    <p class="section-label">Przykłady prac</p>
+    <h2>Social <em>media</em></h2>
+    <div class="social-grid">
+      <div class="social-item">
+        <img src="IMG_0307.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0308.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0309.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0310.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0305.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0306.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0325.png" alt="Social media" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0326.png" alt="Social media" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0327.png" alt="Social media" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0328.png" alt="Social media" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0338.png" alt="Social media" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0340.png" alt="Social media" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0342.png" alt="Social media" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0346.png" alt="Social media" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0347.png" alt="Social media" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0350.png" alt="Social media" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0352.png" alt="Social media" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0357.png" alt="Social media" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0359.png" alt="Social media" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0361.png" alt="Social media" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0363.png" alt="Social media" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0365.png" alt="Social media" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="social-item">
+        <img src="IMG_0366.png" alt="Social media" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO EDITING -->
+  <section id="montaz">
+    <p class="section-label">Usługa</p>
+    <h2>Montaż <em>wideo</em></h2>
+    <div class="montaz-inner">
+      <div class="montaz-text">
+        <p>Zajmuję się profesjonalnym montażem filmów — reklam, klipów muzycznych, materiałów na social media i treści atmosferycznych.</p>
+        <p>Wyślij swój materiał — zwrócę gotowy, dopracowany projekt.</p>
+        <div class="montaz-tags">
+          <span class="tag">Reklamy</span>
+          <span class="tag">Klipy muzyczne</span>
+          <span class="tag">Social media</span>
+          <span class="tag">Filmy ambient</span>
+        </div>
+        <a href="#contact" class="btn btn-gold" style="margin-top:2rem; display:inline-block;">Zamów montaż</a>
+      </div>
+      <div class="montaz-visual">
+        <img src="IMG_0311.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <p class="section-label">Usługi</p>
+    <h2>Co <em>oferuję</em></h2>
+
+    <div class="services-grid">
+      <div class="service-item">
+        <div class="service-num">01</div>
+        <p class="service-title">Treści wideo</p>
+        <p class="service-desc">Reklamy, spoty, filmy ambient i wizualizacje. Od pomysłu do gotowego pliku.</p>
+      </div>
+      <div class="service-item">
+        <div class="service-num">02</div>
+        <p class="service-title">Ilustracje cyfrowe</p>
+        <p class="service-desc">Grafiki na social media, printy, okładki, identyfikacja wizualna marki.</p>
+      </div>
+      <div class="service-item">
+        <div class="service-num">03</div>
+        <p class="service-title">Muzyka &amp; dźwięk</p>
+        <p class="service-desc">Kompozycje na potrzeby wideo, podcastów i projektów kreatywnych.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="section-label">Kontakt</p>
+      <h2>Porozmawiajmy<br>o <em>projekcie</em></h2>
+      <p class="contact-intro">
+        Masz pomysł, projekt lub pytanie?<br>
+        Napisz — odpiszę najszybciej jak to możliwe.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:annamoes@proton.me" class="contact-email">
+          <span>✉</span> annamoes@proton.me
+        </a>
+        <a href="https://wa.me/48517711772" target="_blank" class="contact-email">
+          <span>&#128241;</span> WhatsApp
+        </a>
+      </div>
+      <div style="display:flex; gap:1rem; margin-top:0.5rem; flex-wrap:wrap;">
+        <a href="mailto:annamoes@proton.me" class="btn btn-gold">Napisz e-mail</a>
+        <a href="https://wa.me/48517711772" target="_blank" class="btn btn-ghost">WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2026 Anna Kholod Ai-kreator</span>
+    <span>Tworzenie treści · Polska</span>
+    <a href="#hero">↑ Powrót na górę</a>
+  </footer>
+
+</body>
+</html>
